@@ -3,8 +3,11 @@ import Head from "next/head";
 import PokeCard from 'components/poke-card';
 import {useAtom} from "jotai";
 import {inputAtom, pokemonsAtom, searchedPokemonAtom} from "store";
+import {useRouter} from "next/router";
+import {makePublicUrl} from "../../lib/routes";
 
 const Home = () => {
+    const router = useRouter()
     const [data, setData] = useState<any>([]);
     const [searchData,] = useAtom(searchedPokemonAtom)
     const [pokemons,] = useAtom(pokemonsAtom)
@@ -12,9 +15,8 @@ const Home = () => {
 
     useEffect(() => {
         input && searchData ? setData(searchData) : setData(pokemons)
+        !pokemons && router.push(makePublicUrl('/'));
     }, [input, data, searchData]);
-
-    console.log(data)
 
     return (
         <>
