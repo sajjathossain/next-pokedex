@@ -1,8 +1,28 @@
-import {ResultInterface} from "../types";
-const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
+const baseUrl = 'https://pokeapi.co/api/v2/pokemon'
 
-export const getAllPokemons = async (): Promise<ResultInterface[]> => {
-    const res = await fetch(baseUrl);
-    const data = await res.json();
-    return data.results;
+interface RequestInterface {
+    id?: string | null;
+}
+
+const makeAPIRequest = async ({ id }: RequestInterface) => {
+    try {
+        const res = await fetch(`${baseUrl}${id ? `/${id}` : "?limit=1000"}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data = await res.json();
+        return id ? data : data.results;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getAllPokemons = async () => {
+    return await makeAPIRequest({id: null});
+}
+
+export const getPokemonData = async (id: string) => {
+    return await makeAPIRequest({id})
 }

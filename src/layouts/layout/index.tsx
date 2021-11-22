@@ -1,11 +1,15 @@
 import React, {ReactNode} from 'react';
-import Navbar from "../navbar";
+import Navbar from "layouts/navbar";
+import SearchPokemon from "components/search-pokemon";
 
 const Layout: React.FC<ReactNode> = ({ children }) => {
     return (
-        <div className={"w-screen h-screen bg-gray-100"}>
+        <div className={"max-w-screen min-h-full bg-gray-200"}>
             <Navbar />
-            {children}
+            <SearchPokemon />
+            <main className={'py-4'}>
+                {children}
+            </main>
         </div>
     );
 };
