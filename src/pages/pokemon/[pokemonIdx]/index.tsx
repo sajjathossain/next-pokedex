@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 import Head from 'next/head'
 import {getPokemonData} from 'api'
 import Image from "next/image";
@@ -10,10 +10,10 @@ const PokemonIdx = () => {
 
     const getPokeData = async (pokemonIdx: string) => {
         try {
-            const data = await getPokemonData(pokemonIdx)
+            const data = await getPokemonData(parseInt(pokemonIdx).toString())
             return await data;
         } catch (error) {
-            console.log(error);
+            console.log("pokeidx", error);
         }
     }
 
@@ -22,7 +22,6 @@ const PokemonIdx = () => {
         getPokeData(pokemonIdx).then(response => setPokeData(response))
     },[setPokeData])
 
-    console.log("pokedata",pokeData)
     return pokeData ? (
         <>
             <Head>

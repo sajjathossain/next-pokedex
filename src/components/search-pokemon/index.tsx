@@ -1,11 +1,19 @@
-import React, {ChangeEventHandler, useState} from 'react';
+import React from 'react';
+import {useAtom} from "jotai";
+import {inputAtom, pokemonsAtom, searchedPokemonAtom} from "store";
 
 const SearchPokemon = () => {
-    const [data, setData] = useState<string>("");
+    const [data, setData] = useAtom<string>(inputAtom);
+    const [pokemons,] = useAtom(pokemonsAtom)
+    const [, setSearchedPoke] = useAtom(searchedPokemonAtom)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const eventTarget = event.target as HTMLInputElement
+        // @ts-ignore
         setData(eventTarget.value)
+
+        const searches = pokemons.filter((pokemon: any) => pokemon.name.includes(data))
+        setSearchedPoke(searches)
     }
 
     const handleSearch = () => {

@@ -6,7 +6,7 @@ interface RequestInterface {
 
 const makeAPIRequest = async ({ id }: RequestInterface) => {
     try {
-        const res = await fetch(`${baseUrl}${id ? `/${id}` : "?limit=1000"}`, {
+        const res = await fetch(`${baseUrl}${id ? `/${id}` : "?limit=878"}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -15,7 +15,7 @@ const makeAPIRequest = async ({ id }: RequestInterface) => {
         const data = await res.json();
         return id ? data : data.results;
     } catch (error) {
-        console.log(error)
+        console.log("base", error)
     }
 }
 
