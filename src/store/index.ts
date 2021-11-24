@@ -1,5 +1,8 @@
-import {atom} from "jotai";
+/** @format */
 
-export const pokemonsAtom = atom<any>([])
-export const searchedPokemonAtom = atom<any>([])
-export const inputAtom = atom<string>("")
+import { atom } from 'jotai';
+import { ResultInterface } from 'types';
+
+export const pokemonsAtom = atom<ResultInterface[]>([]);
+export const searchedPokemonAtom = atom<ResultInterface[]>([]);
+export const inputAtom = atom<string>('');

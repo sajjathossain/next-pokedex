@@ -1,5 +1,7 @@
-import config from 'config'
+/** @format */
+
+import config from 'config';
 
 export const getLocalImagePath = (imageName: string): string => {
-    return `${config.baseUrl}/images/${imageName}`
-}
+  return `${config.baseUrl}/images/${imageName}`;
+};
