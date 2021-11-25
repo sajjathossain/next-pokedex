@@ -5,12 +5,11 @@ import { useAtom } from 'jotai';
 import { inputAtom } from 'store';
 
 const SearchPokemon = () => {
-  const [data, setData] = useAtom<string>(inputAtom);
+  const [data, setData] = useAtom(inputAtom);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const eventTarget = event.target as HTMLInputElement;
-      // @ts-ignore
       setData(eventTarget.value);
     },
     [setData]

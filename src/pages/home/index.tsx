@@ -13,12 +13,12 @@ import { getLocalImagePath } from '../../lib/image';
 const Home: React.FC = () => {
   const router = useRouter();
   const [data, setData] = useState<APIResponseInterface[]>([]);
-  const [pokemons] = useAtom<APIResponseInterface[]>(pokemonsAtom);
-  const [input] = useAtom<string>(inputAtom);
+  const [pokemons] = useAtom(pokemonsAtom);
+  const [input] = useAtom(inputAtom);
 
   useEffect(() => {
     const searches = pokemons.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(input.toLowerCase())
+      pokemon.name.toLowerCase().includes(input.toLowerCase()),
     );
     setData(searches);
     pokemons.length === 0 && router.push(makePublicUrl('/'));

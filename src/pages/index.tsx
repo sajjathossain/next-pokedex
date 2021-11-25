@@ -9,7 +9,7 @@ import { APIResponseInterface } from '../types';
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const [pokemon, setPokemon] = useAtom<APIResponseInterface[]>(pokemonsAtom);
+  const [pokemon, setPokemon] = useAtom(pokemonsAtom);
 
   useEffect(() => {
     const getData = async () => {
@@ -29,7 +29,6 @@ const Index: NextPage = () => {
       }
     };
 
-    // @ts-ignore
     getData().then((res) => setPokemon(res));
     pokemon.length > 0 && router.push(makePublicUrl('/home'));
   }, [pokemon]);
