@@ -7,16 +7,16 @@ import { useAtom } from 'jotai';
 import { inputAtom, pokemonsAtom } from 'store';
 import { useRouter } from 'next/router';
 import { makePublicUrl } from 'lib/routes';
-import { ResultInterface } from 'types';
+import { APIResponseInterface } from 'types';
 
 const Home: React.FC = () => {
   const router = useRouter();
-  const [data, setData] = useState<ResultInterface[]>([]);
-  const [pokemons] = useAtom<ResultInterface[]>(pokemonsAtom);
+  const [data, setData] = useState<APIResponseInterface[]>([]);
+  const [pokemons] = useAtom<APIResponseInterface[]>(pokemonsAtom);
   const [input] = useAtom<string>(inputAtom);
 
   useEffect(() => {
-    const searches = pokemons.filter((pokemon) => pokemon.name.includes(input));
+    const searches = pokemons.filter((pokemon) => pokemon.name.toLowerCase().includes(input.toLowerCase()));
     setData(searches);
     pokemons.length === 0 && router.push(makePublicUrl('/'));
   }, [input]);
@@ -24,9 +24,9 @@ const Home: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
-        <meta name="description" content="Pokedex App useing next.js" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Pokedex</title>
+        <meta name='description' content='Pokedex App useing next.js' />
+        <link rel='icon' href='/images/home.ico' />
       </Head>
 
       <main className="w-3/4 mx-auto grid grid-cols-3 gap-6">

@@ -9,7 +9,7 @@ import { getLocalImagePath } from 'lib/image';
 const Navbar = () => {
   const urls = [
     {
-      path: '/',
+      path: '/home',
       name: 'Home',
     },
     {
@@ -24,7 +24,7 @@ const Navbar = () => {
         className={'w-3/4 mx-auto flex justify-between items-center px-4 py-2'}
       >
         <div className={'h-full cursor-pointer'}>
-          <Link href={'/'}>
+          <Link href={makePublicUrl(urls[0].path)}>
             <Image
               alt={'logo'}
               unoptimized

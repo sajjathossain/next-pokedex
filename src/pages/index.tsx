@@ -5,11 +5,11 @@ import { makePublicUrl } from 'lib/routes';
 import { useAtom } from 'jotai';
 import { pokemonsAtom } from 'store';
 import { getAllPokemons } from 'api';
-import { ResultInterface } from '../types';
+import { APIResponseInterface } from '../types';
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const [pokemon, setPokemon] = useAtom<ResultInterface[]>(pokemonsAtom);
+  const [pokemon, setPokemon] = useAtom<APIResponseInterface[]>(pokemonsAtom);
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +22,7 @@ const Index: NextPage = () => {
           };
         });
         return await data.sort(
-          (a: ResultInterface, b: ResultInterface) => a.name > b.name,
+          (a: APIResponseInterface, b: APIResponseInterface) => a.name > b.name,
         );
       } catch (error) {
         console.log(error);

@@ -1,6 +1,6 @@
 /** @format */
 
-export interface ResultInterface {
+export interface APIResponseInterface {
   name: string;
   url: string;
   index: string;

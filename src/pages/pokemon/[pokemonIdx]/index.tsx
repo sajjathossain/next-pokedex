@@ -16,7 +16,7 @@ const PokemonIdx = () => {
       const data = await getPokemonData(parseInt(pokemonIdx).toString());
       return await data;
     } catch (error) {
-      console.log('pokeidx', error);
+      console.log(error);
     }
   };
 
@@ -28,7 +28,8 @@ const PokemonIdx = () => {
   return pokeData ? (
     <>
       <Head>
-        <title>{pokeData.name[0].toUpperCase() + pokeData.name.slice(1)}</title>
+        <title>Pokemon: {pokeData.name[0].toUpperCase() + pokeData.name.slice(1)}</title>
+        <link rel='icon' href={'/images/icon.ico'} />
       </Head>
       <main
         className={
@@ -42,33 +43,43 @@ const PokemonIdx = () => {
               unoptimized
               width={400}
               height={400}
-              src={pokeData.sprites.other['official-artwork']['front_default']}
+              src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${router.query.pokemonIdx}.png`}
             />
             <div className={'flex flex-col justify-center space-y-2'}>
-              <div className={'text-xl font-medium capitalize'}>
-                Name: {pokeData.name}
+              <div className={'flex justify-between capitalize'}>
+                <p className={'font-semibold'}>Name: </p>
+                <p>{pokeData.name}</p>
               </div>
-              <div>Height: {pokeData.height}</div>
-              <div>Weight: {pokeData.weight}</div>
-              <div>Base Experience: {pokeData['base_experience']}</div>
+              <div className={'flex justify-between capitalize'}>
+                <p className={'font-semibold'}>Height:</p>
+                <p>{pokeData.height}</p>
+              </div>
+              <div className={'flex justify-between capitalize'}>
+                <p className={'font-semibold'}>Weight:</p>
+                <p>{pokeData.weight}</p>
+              </div>
+              <div className={'flex justify-between capitalize'}>
+                <p className={'font-semibold'}>Base Experience:</p>
+                <p>{pokeData.base_experience}</p>
+              </div>
               <div
                 className={
-                  'grid grid-cols-3 space-x-4 capitalize font-semibold'
+                  'grid grid-cols-3 justify-evenly capitalize font-semibold'
                 }
               >
                 <div>Stat</div>
-                <div>Base Stat</div>
-                <div>Effort</div>
+                <div className={'text-center'}>Base Stat</div>
+                <div className={'text-center'}>Effort</div>
               </div>
               {pokeData.stats.map((stat: any, idx: number) => {
                 return (
                   <div
                     key={idx}
-                    className={'grid grid-cols-3 space-x-4 capitalize'}
+                    className={'grid grid-cols-3 justify-evenly capitalize'}
                   >
                     <div>{stat.stat.name}</div>
-                    <div>{stat['base_stat']}</div>
-                    <div>{stat.effort}</div>
+                    <div className={'text-center'}>{stat['base_stat']}</div>
+                    <div className={'text-center'}>{stat.effort}</div>
                   </div>
                 );
               })}
@@ -77,7 +88,12 @@ const PokemonIdx = () => {
         </div>
       </main>
     </>
-  ) : null;
+  ) : (
+    <Head>
+      <title>Pokemon: Loading...</title>
+      <link rel='icon' href={'/images/icon.ico'} />
+    </Head>
+  );
 };
 
 export default PokemonIdx;
