@@ -92,10 +92,12 @@ const PokemonIdx = () => {
       </main>
     </>
   ) : (
-    <Head>
-      <title>Pokemon: Loading...</title>
-      <link rel="icon" href={getLocalImagePath('/images/icon.ico')} />
-    </Head>
+    <>
+      <Head>
+        <title>Pokemon: Loading...</title>
+        <link rel="icon" href={getLocalImagePath('/icon.ico')} />
+      </Head>
+    </>
   );
 };
 
