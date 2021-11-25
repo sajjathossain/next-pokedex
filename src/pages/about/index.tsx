@@ -12,7 +12,9 @@ const About = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={'w-full h-auto grid place-items-center'}>
-        <p className={'text-3xl'}>This is a simple Pokedex app use Pokemon API.</p>
+        <p className={'text-3xl'}>
+          This is a simple Pokedex app use Pokemon API.
+        </p>
       </main>
     </>
   );

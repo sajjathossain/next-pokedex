@@ -22,7 +22,7 @@ const Index: NextPage = () => {
           };
         });
         return await data.sort(
-          (a: APIResponseInterface, b: APIResponseInterface) => a.name > b.name,
+          (a: APIResponseInterface, b: APIResponseInterface) => a.name > b.name
         );
       } catch (error) {
         console.log(error);

@@ -6,7 +6,10 @@ import { makePublicUrl } from 'lib/routes';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-const PokeCard: React.FC<{ data: APIResponseInterface; idx: string }> = ({ data, idx }) => {
+const PokeCard: React.FC<{ data: APIResponseInterface; idx: string }> = ({
+  data,
+  idx,
+}) => {
   const router = useRouter();
   const pushToURL = async () => {
     try {
@@ -28,9 +31,9 @@ const PokeCard: React.FC<{ data: APIResponseInterface; idx: string }> = ({ data,
         />
       </div>
       <div className={'text-xl font-semibold capitalize text-center'}>
-          {idx}. {data.name}
-        </div>
+        {idx}. {data.name}
       </div>
+    </div>
   );
 };
 

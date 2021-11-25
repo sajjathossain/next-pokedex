@@ -8,6 +8,7 @@ import { inputAtom, pokemonsAtom } from 'store';
 import { useRouter } from 'next/router';
 import { makePublicUrl } from 'lib/routes';
 import { APIResponseInterface } from 'types';
+import { getLocalImagePath } from '../../lib/image';
 
 const Home: React.FC = () => {
   const router = useRouter();
@@ -16,7 +17,9 @@ const Home: React.FC = () => {
   const [input] = useAtom<string>(inputAtom);
 
   useEffect(() => {
-    const searches = pokemons.filter((pokemon) => pokemon.name.toLowerCase().includes(input.toLowerCase()));
+    const searches = pokemons.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(input.toLowerCase())
+    );
     setData(searches);
     pokemons.length === 0 && router.push(makePublicUrl('/'));
   }, [input]);
@@ -25,8 +28,8 @@ const Home: React.FC = () => {
     <>
       <Head>
         <title>Pokedex</title>
-        <meta name='description' content='Pokedex App useing next.js' />
-        <link rel='icon' href='/images/home.ico' />
+        <meta name="description" content="Pokedex App useing next.js" />
+        <link rel="icon" href={getLocalImagePath('home.ico')} />
       </Head>
 
       <main className="w-3/4 mx-auto grid grid-cols-3 gap-6">

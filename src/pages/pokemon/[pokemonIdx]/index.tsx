@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { getPokemonData } from 'api';
 import Image from 'next/image';
 import { pokeDataInterface } from 'types';
+import { getLocalImagePath } from '../../../lib/image';
 
 const PokemonIdx = () => {
   const router = useRouter();
@@ -28,8 +29,10 @@ const PokemonIdx = () => {
   return pokeData ? (
     <>
       <Head>
-        <title>Pokemon: {pokeData.name[0].toUpperCase() + pokeData.name.slice(1)}</title>
-        <link rel='icon' href={'/images/icon.ico'} />
+        <title>
+          Pokemon: {pokeData.name[0].toUpperCase() + pokeData.name.slice(1)}
+        </title>
+        <link rel="icon" href={getLocalImagePath('/icon.ico')} />
       </Head>
       <main
         className={
@@ -91,7 +94,7 @@ const PokemonIdx = () => {
   ) : (
     <Head>
       <title>Pokemon: Loading...</title>
-      <link rel='icon' href={'/images/icon.ico'} />
+      <link rel="icon" href={getLocalImagePath('/images/icon.ico')} />
     </Head>
   );
 };
