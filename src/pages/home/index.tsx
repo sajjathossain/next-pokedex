@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { makePublicUrl } from 'lib/routes';
 import { APIResponseInterface } from 'types';
 import { getLocalImagePath } from '../../lib/image';
+import { getLocalImagePath } from 'lib/image';
 
 const Home: React.FC = () => {
   const router = useRouter();

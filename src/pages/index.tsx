@@ -6,6 +6,7 @@ import { useAtom } from 'jotai';
 import { pokemonsAtom } from 'store';
 import { getAllPokemons } from 'api';
 import { APIResponseInterface } from '../types';
+import { APIResponseInterface } from 'types';
 
 const Index: NextPage = () => {
   const router = useRouter();
