@@ -5,7 +5,6 @@ import { makePublicUrl } from 'lib/routes';
 import { useAtom } from 'jotai';
 import { pokemonsAtom } from 'store';
 import { getAllPokemons } from 'api';
-import { APIResponseInterface } from '../types';
 import { APIResponseInterface } from 'types';
 
 const Index: NextPage = () => {
@@ -32,7 +31,7 @@ const Index: NextPage = () => {
 
     getData().then((res) => setPokemon(res));
     pokemon.length > 0 && router.push(makePublicUrl('/home'));
-  }, [pokemon]);
+  }, [pokemon, router, setPokemon]);
 
   return null;
 };

@@ -8,7 +8,6 @@ import { inputAtom, pokemonsAtom } from 'store';
 import { useRouter } from 'next/router';
 import { makePublicUrl } from 'lib/routes';
 import { APIResponseInterface } from 'types';
-import { getLocalImagePath } from '../../lib/image';
 import { getLocalImagePath } from 'lib/image';
 
 const Home: React.FC = () => {
@@ -19,11 +18,11 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const searches = pokemons.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(input.toLowerCase()),
+      pokemon.name.toLowerCase().includes(input.toLowerCase())
     );
     setData(searches);
     pokemons.length === 0 && router.push(makePublicUrl('/'));
-  }, [input]);
+  }, [input, pokemons, router]);
 
   return (
     <>
