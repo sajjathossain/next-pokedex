@@ -7,10 +7,13 @@ import { getPokemonData } from 'api';
 import Image from 'next/image';
 import { pokeDataInterface } from 'types';
 import { getLocalImagePath } from '../../../lib/image';
+import { useAtom } from 'jotai';
+import { darkModeAtom } from 'store';
 
 const PokemonIdx = () => {
   const router = useRouter();
   const [pokeData, setPokeData] = useState<pokeDataInterface | null>(null);
+  const [darkmode] = useAtom(darkModeAtom);
 
   const getPokeData = async (pokemonIdx: string) => {
     try {
@@ -24,7 +27,7 @@ const PokemonIdx = () => {
   useEffect(() => {
     const pokemonIdx = router.query.pokemonIdx as string;
     getPokeData(pokemonIdx).then((response) => setPokeData(response));
-  }, [setPokeData]);
+  }, [setPokeData, router.query.pokemonIdx]);
 
   return pokeData ? (
     <>
@@ -48,7 +51,10 @@ const PokemonIdx = () => {
               height={400}
               src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${router.query.pokemonIdx}.png`}
             />
-            <div className={'flex flex-col justify-center space-y-2'}>
+            <div
+              className={`flex flex-col justify-center space-y-2
+              `}
+            >
               <div className={'flex justify-between capitalize'}>
                 <p className={'font-semibold'}>Name: </p>
                 <p>{pokeData.name}</p>

@@ -3,10 +3,18 @@
 import React, { ReactNode } from 'react';
 import Navbar from 'layouts/navbar';
 import SearchPokemon from 'components/search-pokemon';
+import { useAtom } from 'jotai';
+import { darkModeAtom } from 'store';
 
 const Layout: React.FC<ReactNode> = ({ children }) => {
+  const [darkmode] = useAtom(darkModeAtom);
+
   return (
-    <div className={'max-w-screen min-h-screen bg-gray-100'}>
+    <div
+      className={` max-w-screen min-h-screen transition transition-colors duration-500 ${
+        darkmode ? 'dark bg-gray-800 text-gray-100' : 'bg-gray-100'
+      }`}
+    >
       <Navbar />
       <SearchPokemon />
       <main className={'py-4'}>{children}</main>

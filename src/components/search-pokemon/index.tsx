@@ -2,10 +2,11 @@
 
 import React, { useCallback } from 'react';
 import { useAtom } from 'jotai';
-import { inputAtom } from 'store';
+import { darkModeAtom, inputAtom } from 'store';
 
 const SearchPokemon = () => {
   const [data, setData] = useAtom(inputAtom);
+  const [darkmode] = useAtom(darkModeAtom);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,16 +19,15 @@ const SearchPokemon = () => {
   return (
     <div className={'w-3/4 mx-auto flex justify-center mt-4 bg-transparent'}>
       <div
-        className={
-          'flex rounded-full px-4 w-2/4 max-h-max bg-gray-50 focus-within:ring-2 ring-blue-600'
-        }
+        className={`flex rounded-full px-4 w-2/4 max-h-max ${
+          darkmode ? 'bg-gray-600' : 'bg-gray-50'
+        } focus-within:ring-2 ring-blue-600`}
       >
         <input
           onChange={handleChange}
           value={data}
-          className={
-            'ring-0 outline-none border-0 h-10 bg-transparent flex flex-1'
-          }
+          className={`ring-0 outline-none border-0 h-10 bg-transparent flex flex-1
+          `}
           type="text"
           placeholder={'Enter any pokemon name*'}
           autoComplete={'none'}
@@ -36,7 +36,8 @@ const SearchPokemon = () => {
         <button className={'w-auto pointer-events-none'}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 focus-within:text-blue-600 text-gray-500"
+            className={`h-6 w-6 focus-within:text-blue-600
+            `}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
