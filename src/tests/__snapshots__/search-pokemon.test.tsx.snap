@@ -10,7 +10,8 @@ exports[`Search Pokemon Component checks if search pokemon component renders per
     >
       <input
         autocomplete="none"
-        class="ring-0 outline-none border-0 h-10 bg-transparent flex flex-1"
+        class="ring-0 outline-none border-0 h-10 bg-transparent flex flex-1
+          "
         placeholder="Enter any pokemon name*"
         required=""
         type="text"
@@ -20,7 +21,8 @@ exports[`Search Pokemon Component checks if search pokemon component renders per
         class="w-auto pointer-events-none"
       >
         <svg
-          class="h-6 w-6 focus-within:text-blue-600 text-gray-500"
+          class="h-6 w-6 focus-within:text-blue-600
+            "
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
