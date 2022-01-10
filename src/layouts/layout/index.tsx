@@ -11,7 +11,7 @@ const Layout: React.FC<ReactNode> = ({ children }) => {
 
   return (
     <div
-      className={` max-w-screen min-h-screen transition transition-colors duration-500 ${
+      className={` max-w-screen min-h-screen  ${
         darkmode ? 'dark bg-gray-800 text-gray-100' : 'bg-gray-100'
       }`}
     >

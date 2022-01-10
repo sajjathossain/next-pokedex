@@ -12,7 +12,7 @@ const Navbar = () => {
   const [darkmode, setDarkMode] = useAtom(darkModeAtom);
   const urls = [
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
     },
     {
