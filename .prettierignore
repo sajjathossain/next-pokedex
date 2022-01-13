@@ -2,3 +2,7 @@
 node_modules
 .code
 .idea
+
+
+# ignored fils
+*.test.tsx.snap

@@ -1,4 +1,4 @@
-import SearchPokemon from 'components/search-pokemon';
+import SearchPokemon from '.';
 import { render } from '@testing-library/react';
 
 const renderComponent = () => {
