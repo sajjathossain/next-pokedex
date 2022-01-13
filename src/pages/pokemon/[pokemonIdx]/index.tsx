@@ -5,35 +5,41 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { getPokemonData } from 'api';
 import Image from 'next/image';
-import { pokeDataInterface } from 'types';
 import { getLocalImagePath } from '../../../lib/image';
-import { useAtom } from 'jotai';
-import { darkModeAtom } from 'store';
+import { useQuery } from 'react-query';
 
 const PokemonIdx = () => {
   const router = useRouter();
-  const [pokeData, setPokeData] = useState<pokeDataInterface | null>(null);
-  const [darkmode] = useAtom(darkModeAtom);
 
-  const getPokeData = async (pokemonIdx: string) => {
-    try {
-      const data = await getPokemonData(parseInt(pokemonIdx).toString());
-      return await data;
-    } catch (error) {
-      console.log(error);
-    }
+  const getPokeData = async ({ queryKey }: { queryKey: any }) => {
+    const data = await getPokemonData(parseInt(queryKey[1]).toString());
+    return data;
   };
 
-  useEffect(() => {
-    const pokemonIdx = router.query.pokemonIdx as string;
-    getPokeData(pokemonIdx).then((response) => setPokeData(response));
-  }, [setPokeData, router.query.pokemonIdx]);
+  const { data, isLoading } = useQuery(
+    ['pokemon', router.query.pokemonIdx],
+    getPokeData
+  );
 
-  return pokeData ? (
+  if (isLoading) {
+    return (
+      <>
+        <Head>
+          <title>Pokemon: Loading...</title>
+          <link rel="icon" href={getLocalImagePath('/icon.ico')} />
+        </Head>
+        <div className="text-3xl text-yellow-500 text-center font-semibold">
+          Loading data
+        </div>
+      </>
+    );
+  }
+
+  return (
     <>
       <Head>
         <title>
-          Pokemon: {pokeData.name[0].toUpperCase() + pokeData.name.slice(1)}
+          Pokemon: {data.name[0].toUpperCase() + data.name.slice(1)}
         </title>
         <link rel="icon" href={getLocalImagePath('/icon.ico')} />
       </Head>
@@ -45,7 +51,7 @@ const PokemonIdx = () => {
         <div className={'w-3/4 mx-auto min-h-full'}>
           <div className={'flex gap-4'}>
             <Image
-              alt={pokeData.name}
+              alt={data.name}
               unoptimized
               width={400}
               height={400}
@@ -57,19 +63,19 @@ const PokemonIdx = () => {
             >
               <div className={'flex justify-between capitalize'}>
                 <p className={'font-semibold'}>Name: </p>
-                <p>{pokeData.name}</p>
+                <p>{data.name}</p>
               </div>
               <div className={'flex justify-between capitalize'}>
                 <p className={'font-semibold'}>Height:</p>
-                <p>{pokeData.height}</p>
+                <p>{data.height}</p>
               </div>
               <div className={'flex justify-between capitalize'}>
                 <p className={'font-semibold'}>Weight:</p>
-                <p>{pokeData.weight}</p>
+                <p>{data.weight}</p>
               </div>
               <div className={'flex justify-between capitalize'}>
                 <p className={'font-semibold'}>Base Experience:</p>
-                <p>{pokeData.base_experience}</p>
+                <p>{data.base_experience}</p>
               </div>
               <div
                 className={
@@ -80,7 +86,7 @@ const PokemonIdx = () => {
                 <div className={'text-center'}>Base Stat</div>
                 <div className={'text-center'}>Effort</div>
               </div>
-              {pokeData.stats.map((stat: any, idx: number) => {
+              {data.stats.map((stat: any, idx: number) => {
                 return (
                   <div
                     key={idx}
@@ -96,13 +102,6 @@ const PokemonIdx = () => {
           </div>
         </div>
       </main>
-    </>
-  ) : (
-    <>
-      <Head>
-        <title>Pokemon: Loading...</title>
-        <link rel="icon" href={getLocalImagePath('/icon.ico')} />
-      </Head>
     </>
   );
 };
